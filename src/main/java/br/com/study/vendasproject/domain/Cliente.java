@@ -1,4 +1,4 @@
-package br.com.study.vendasproject.repository;
+package br.com.study.vendasproject.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
