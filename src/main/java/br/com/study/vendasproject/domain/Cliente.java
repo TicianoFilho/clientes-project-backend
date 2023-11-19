@@ -1,9 +1,6 @@
 package br.com.study.vendasproject.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Cliente {
 
@@ -27,5 +25,10 @@ public class Cliente {
 
     @Column
     private LocalDate dataCadastro;
+
+    @PrePersist
+    private void setCreateDate() {
+        this.setDataCadastro(LocalDate.now());
+    }
 
 }
