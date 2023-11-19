@@ -29,4 +29,5 @@ public class Cliente {
 
     @Column
     private LocalDate dataCadastro;
+
 }
