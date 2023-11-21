@@ -31,4 +31,9 @@ public class ClienteResource {
     public ResponseEntity<ClienteResponseDTO> findById(@PathVariable Long id) {
         return this.clienteService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        return this.clienteService.delete(id);
+    }
 }

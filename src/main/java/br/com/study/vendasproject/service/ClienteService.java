@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
@@ -30,5 +32,13 @@ public class ClienteService extends AbstractBaseClass {
     public ResponseEntity<ClienteResponseDTO> findById(Long id) {
         Cliente cliente = this.clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return new ResponseEntity<>(mapper.map(cliente, ClienteResponseDTO.class), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Cliente clienteToDelete = clienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        clienteRepository.delete(clienteToDelete);
+        return ResponseEntity.noContent().build();
     }
 }
