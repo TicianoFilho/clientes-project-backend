@@ -27,20 +27,21 @@ public class ClienteService extends AbstractBaseClass {
     }
 
     public ResponseEntity<ClienteResponseDTO> findById(Long id) {
-        Cliente cliente = this.clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Cliente cliente = this.clienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, this.getMessage("cliente.not.found")));
         return new ResponseEntity<>(mapper.map(cliente, ClienteResponseDTO.class), HttpStatus.OK);
     }
 
     public ResponseEntity<Void> delete(Long id) {
         Cliente clienteToDelete = clienteRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "{cliente.not.found}"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, this.getMessage("cliente.not.found")));
         clienteRepository.delete(clienteToDelete);
         return ResponseEntity.noContent().build();
     }
 
     public ResponseEntity<ClienteResponseDTO> update(Long id, @RequestBody ClienteCreateDTO clienteCreateDTO) {
         Cliente clienteToUpdate = clienteRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado com ID: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, this.getMessage("cliente.not.found")));
         mapper.map(clienteCreateDTO, clienteToUpdate);
         Cliente clienteUpdated = clienteRepository.save(clienteToUpdate);
         return ResponseEntity.ok(mapper.map(clienteUpdated, ClienteResponseDTO.class));
