@@ -36,4 +36,9 @@ public class ClienteResource {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         return this.clienteService.delete(id);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteResponseDTO> update(@PathVariable Long id, @RequestBody ClienteCreateDTO clienteCreateDTO) {
+        return this.clienteService.update(id, clienteCreateDTO);
+    }
 }

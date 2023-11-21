@@ -8,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
 
 @Service
 public class ClienteService extends AbstractBaseClass {
@@ -34,11 +31,18 @@ public class ClienteService extends AbstractBaseClass {
         return new ResponseEntity<>(mapper.map(cliente, ClienteResponseDTO.class), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(Long id) {
         Cliente clienteToDelete = clienteRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         clienteRepository.delete(clienteToDelete);
         return ResponseEntity.noContent().build();
+    }
+
+    public ResponseEntity<ClienteResponseDTO> update(Long id, @RequestBody ClienteCreateDTO clienteCreateDTO) {
+        Cliente clienteToUpdate = clienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado com ID: " + id));
+        mapper.map(clienteCreateDTO, clienteToUpdate);
+        Cliente clienteUpdated = clienteRepository.save(clienteToUpdate);
+        return ResponseEntity.ok(mapper.map(clienteUpdated, ClienteResponseDTO.class));
     }
 }
