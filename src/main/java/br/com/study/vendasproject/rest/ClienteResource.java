@@ -38,7 +38,7 @@ public class ClienteResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteResponseDTO> update(@PathVariable Long id, @RequestBody ClienteCreateDTO clienteCreateDTO) {
+    public ResponseEntity<ClienteResponseDTO> update(@PathVariable Long id, @Valid @RequestBody ClienteCreateDTO clienteCreateDTO) {
         return this.clienteService.update(id, clienteCreateDTO);
     }
 }

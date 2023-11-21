@@ -33,7 +33,7 @@ public class ClienteService extends AbstractBaseClass {
 
     public ResponseEntity<Void> delete(Long id) {
         Cliente clienteToDelete = clienteRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "{cliente.not.found}"));
         clienteRepository.delete(clienteToDelete);
         return ResponseEntity.noContent().build();
     }
