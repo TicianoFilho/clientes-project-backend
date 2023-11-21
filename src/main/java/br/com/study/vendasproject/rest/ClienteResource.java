@@ -5,6 +5,7 @@ import br.com.study.vendasproject.dto.ClienteResponseDTO;
 import br.com.study.vendasproject.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,5 +25,10 @@ public class ClienteResource {
     @ResponseStatus(HttpStatus.CREATED)
     public ClienteResponseDTO save(@Valid @RequestBody ClienteCreateDTO clienteCreateDTO) {
         return this.clienteService.save(clienteCreateDTO).getBody();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteResponseDTO> findById(@PathVariable Long id) {
+        return this.clienteService.findById(id);
     }
 }
