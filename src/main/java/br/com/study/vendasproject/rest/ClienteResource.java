@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/clientes")
 public class ClienteResource {
@@ -20,7 +22,7 @@ public class ClienteResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClienteResponseDTO save(@RequestBody ClienteCreateDTO clienteCreateDTO) {
+    public ClienteResponseDTO save(@Valid @RequestBody ClienteCreateDTO clienteCreateDTO) {
         return this.clienteService.save(clienteCreateDTO).getBody();
     }
 }
