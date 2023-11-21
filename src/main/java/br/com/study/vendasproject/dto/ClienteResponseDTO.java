@@ -1,5 +1,6 @@
 package br.com.study.vendasproject.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,6 @@ public class ClienteResponseDTO implements Serializable {
 
     private String cpf;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCadastro;
 }

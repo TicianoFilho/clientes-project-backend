@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Optional;
 
 @Service
 public class ClienteService extends AbstractBaseClass {
@@ -22,5 +25,10 @@ public class ClienteService extends AbstractBaseClass {
     public ResponseEntity<ClienteResponseDTO> save(ClienteCreateDTO clienteCreateDTO) {
         Cliente cliente = mapper.map(clienteCreateDTO, Cliente.class);
         return new ResponseEntity<>(mapper.map(clienteRepository.save(cliente), ClienteResponseDTO.class), HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<ClienteResponseDTO> findById(Long id) {
+        Cliente cliente = this.clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(mapper.map(cliente, ClienteResponseDTO.class), HttpStatus.OK);
     }
 }
