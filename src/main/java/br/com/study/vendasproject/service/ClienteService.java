@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 public class ClienteService extends AbstractBaseClass {
 
@@ -45,5 +47,9 @@ public class ClienteService extends AbstractBaseClass {
         mapper.map(clienteCreateDTO, clienteToUpdate);
         Cliente clienteUpdated = clienteRepository.save(clienteToUpdate);
         return ResponseEntity.ok(mapper.map(clienteUpdated, ClienteResponseDTO.class));
+    }
+
+    public ResponseEntity<List<Cliente>> getAll() {
+        return ResponseEntity.ok(this.clienteRepository.findAll());
     }
 }
