@@ -1,4 +1,4 @@
-package br.com.study.vendasproject.service;
+package br.com.study.vendasproject.rest.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

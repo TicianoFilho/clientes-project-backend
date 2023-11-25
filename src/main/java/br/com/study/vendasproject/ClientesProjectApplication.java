@@ -1,8 +1,7 @@
 package br.com.study.vendasproject;
 
 import br.com.study.vendasproject.domain.Cliente;
-import br.com.study.vendasproject.repository.ClienteRepository;
-import ch.qos.logback.core.net.server.Client;
+import br.com.study.vendasproject.rest.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
