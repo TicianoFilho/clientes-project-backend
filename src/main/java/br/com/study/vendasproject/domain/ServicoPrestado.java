@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class ServicoPrestado {
@@ -26,4 +26,12 @@ public class ServicoPrestado {
 
     @Column
     private BigDecimal valor;
+
+    @Column
+    private LocalDate dataCadastro;
+
+    @PrePersist
+    private void setDataCadastro() {
+        this.setDataCadastro(LocalDate.now());
+    }
 }
