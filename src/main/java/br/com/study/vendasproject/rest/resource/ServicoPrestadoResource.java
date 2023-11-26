@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/servicos-prestados")
@@ -25,6 +26,15 @@ public class ServicoPrestadoResource {
     @PostMapping
     public ResponseEntity<ServicoPrestadoResponseDTO> save(@Valid @RequestBody ServicoPrestadoCreateDTO servicoPrestadoCreateDTO) {
         return new ResponseEntity<ServicoPrestadoResponseDTO>(this.servicoPrestadoService.save(servicoPrestadoCreateDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ServicoPrestadoResponseDTO>> findByClienteNomeAndMesServicoPrestado(
+            @RequestParam(value = "nomeCliente", required = false) String nomeCliente,
+            @RequestParam(value = "mes", required = false) Integer mes
+    ) {
+        List<ServicoPrestadoResponseDTO> response = this.servicoPrestadoService.findByClienteNomeAndMesServicoPrestado(nomeCliente, mes);
+        return new ResponseEntity<List<ServicoPrestadoResponseDTO>>(response, HttpStatus.OK);
     }
 
 

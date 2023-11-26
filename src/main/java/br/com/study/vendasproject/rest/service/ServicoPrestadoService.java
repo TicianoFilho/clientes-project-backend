@@ -6,8 +6,11 @@ import br.com.study.vendasproject.dto.ServicoPrestadoCreateDTO;
 import br.com.study.vendasproject.dto.ServicoPrestadoResponseDTO;
 import br.com.study.vendasproject.exception.ServicoPrestadoException;
 import br.com.study.vendasproject.rest.repository.ServicoPrestadoRepository;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ServicoPrestadoService extends AbstractBaseClass {
@@ -33,5 +36,10 @@ public class ServicoPrestadoService extends AbstractBaseClass {
             throw new ServicoPrestadoException(this.getMessage("servico.prestado.create.error"));
         }
         return servicoPrestadoResponseDTO;
+    }
+
+    public List<ServicoPrestadoResponseDTO> findByClienteNomeAndMesServicoPrestado(String clienteNome, Integer mes) {
+        List<ServicoPrestado> servicosPrestados = this.servicoPrestadoRepository.findByClienteNomeAndMesServicoPrestado(clienteNome, mes);
+        return mapper.map(servicosPrestados, new TypeToken<List<ServicoPrestadoResponseDTO>>(){}.getType());
     }
 }
