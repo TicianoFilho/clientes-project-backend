@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Bean;
 public class ClientesProjectApplication {
 
 	//Just for insert test
-	@Bean
-	public CommandLineRunner run (@Autowired ClienteRepository clienteRepository) {
-		return args -> {
-			Cliente cliente = Cliente.builder().cpf("11111111111").nome("Ticiano Filho").build();
-			clienteRepository.save(cliente);
-		};
-	}
+//	@Bean
+//	public CommandLineRunner run (@Autowired ClienteRepository clienteRepository) {
+//		return args -> {
+//			Cliente cliente = Cliente.builder().cpf("11111111111").nome("Ticiano Filho").build();
+//			clienteRepository.save(cliente);
+//		};
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClientesProjectApplication.class, args);
