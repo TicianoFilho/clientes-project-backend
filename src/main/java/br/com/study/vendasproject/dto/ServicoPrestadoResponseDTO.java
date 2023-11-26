@@ -1,5 +1,6 @@
 package br.com.study.vendasproject.dto;
 
+import br.com.study.vendasproject.domain.Cliente;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,7 @@ public class ServicoPrestadoResponseDTO {
 
     private String descricao;
 
-    private Long clienteId;
+    private Cliente cliente;
 
     private BigDecimal valor;
 

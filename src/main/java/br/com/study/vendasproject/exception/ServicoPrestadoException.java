@@ -6,3 +6,4 @@ public class ServicoPrestadoException extends RuntimeException {
         super(message);
     }
 }
+q
