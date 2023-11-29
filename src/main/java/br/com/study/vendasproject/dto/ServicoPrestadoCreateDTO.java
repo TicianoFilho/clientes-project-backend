@@ -1,6 +1,7 @@
 package br.com.study.vendasproject.dto;
 
 import br.com.study.vendasproject.domain.Cliente;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,8 @@ public class ServicoPrestadoCreateDTO {
 
     private String descricao;
 
-    private Long clienteId;
+    @JsonProperty("clienteId")
+    private Long clienteCode;
 
     private BigDecimal valor;
 }
