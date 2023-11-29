@@ -12,7 +12,7 @@ public class ServicoPrestadoCreateDTO {
 
     private String descricao;
 
-    private Cliente cliente;
+    private Long clienteId;
 
     private BigDecimal valor;
 }

@@ -27,7 +27,7 @@ public class ServicoPrestadoService extends AbstractBaseClass {
     public ServicoPrestadoResponseDTO save(ServicoPrestadoCreateDTO servicoPrestadoCreateDTO) {
         ServicoPrestadoResponseDTO servicoPrestadoResponseDTO = new ServicoPrestadoResponseDTO();
         try {
-            Cliente cliente = this.clienteService.findEntityById(servicoPrestadoCreateDTO.getCliente().getId());
+            Cliente cliente = this.clienteService.findEntityById(servicoPrestadoCreateDTO.getClienteId());
             ServicoPrestado servicoPrestado = mapper.map(servicoPrestadoCreateDTO, ServicoPrestado.class);
             servicoPrestado.setCliente(cliente);
             servicoPrestadoRepository.save(servicoPrestado);
