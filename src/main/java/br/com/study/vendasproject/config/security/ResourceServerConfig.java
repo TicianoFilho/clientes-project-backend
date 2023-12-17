@@ -10,17 +10,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    @Value("${api.base.path}")
-    private String apiBasePath;
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
         // Configurações relativas aos Resources
         http
                 .authorizeRequests()
-                .antMatchers(apiBasePath + "/api/v1/clientes/**").authenticated()
-                .antMatchers(apiBasePath + "/api/v1/servicos-prestados/**").authenticated()
-                .antMatchers(apiBasePath + "/api/v1/usuarios").permitAll()
+                .antMatchers("/api/v1/clientes/**").authenticated()
+                .antMatchers("/api/v1/servicos-prestados/**").authenticated()
+                .antMatchers("/api/v1/usuarios").permitAll()
                 .anyRequest().denyAll();
     }
 }
