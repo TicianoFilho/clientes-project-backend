@@ -1,13 +1,11 @@
 package br.com.study.vendasproject.rest.resource;
 
 import br.com.study.vendasproject.dto.UsuarioDTO;
+import br.com.study.vendasproject.dto.UsuarioUsernameRequestDTO;
 import br.com.study.vendasproject.rest.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -22,5 +20,10 @@ public class UsuarioResource {
     @PostMapping
     public ResponseEntity<UsuarioDTO> save(@RequestBody UsuarioDTO usuarioDTO) {
         return new ResponseEntity<>(this.usuarioService.save(usuarioDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<UsuarioDTO> getByUsername(@RequestBody UsuarioUsernameRequestDTO dto) {
+        return new ResponseEntity<>(this.usuarioService.getByUsername(dto), HttpStatus.OK);
     }
 }

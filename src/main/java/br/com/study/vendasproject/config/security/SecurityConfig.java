@@ -1,5 +1,6 @@
 package br.com.study.vendasproject.config.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,13 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-       auth.
-               inMemoryAuthentication()
-               .withUser("fulano")
-               .password("123")
-               .roles("USER");
+       auth
+               .userDetailsService(myUserDetailsService)
+               .passwordEncoder(this.passwordEncoder());
     }
 
     @Bean
