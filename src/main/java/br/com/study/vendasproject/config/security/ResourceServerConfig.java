@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
+
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -19,7 +20,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/v1/servicos-prestados/**").authenticated()
                 .antMatchers("/h2-console/**", "/h2-console").permitAll()
                 .antMatchers("/api/v1/usuarios/**").permitAll()
-                
+
                 .anyRequest().denyAll();
     }
 }
