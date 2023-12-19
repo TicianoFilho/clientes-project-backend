@@ -35,4 +35,13 @@ public class ApplicationControllerAdvice {
         ApplicationErrorsDTO errorsDTO = new ApplicationErrorsDTO(errorMessage);
         return new ResponseEntity(errorsDTO, statusCode);
     }
+
+    @ExceptionHandler(UsuarioNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity handleValidationErros(UsuarioNotFoundException ex) {
+        String errorMessage = ex.getMessage();
+        HttpStatus statusCode = HttpStatus.NOT_FOUND;
+        ApplicationErrorsDTO errorsDTO = new ApplicationErrorsDTO(errorMessage);
+        return new ResponseEntity(errorsDTO, statusCode);
+    }
 }
