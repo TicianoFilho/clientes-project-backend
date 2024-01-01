@@ -19,7 +19,7 @@ public class UsuarioResource {
 
     @PostMapping
     public ResponseEntity<UsuarioDTO> save(@RequestBody UsuarioDTO usuarioDTO) {
-        return new ResponseEntity<>(this.usuarioService.save(usuarioDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.usuarioService.save(usuarioDTO), HttpStatus.CREATED);q
     }
 
     @GetMapping("/get")
