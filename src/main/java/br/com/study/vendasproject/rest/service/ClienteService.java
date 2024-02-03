@@ -2,6 +2,7 @@ package br.com.study.vendasproject.rest.service;
 
 import br.com.study.vendasproject.domain.Cliente;
 import br.com.study.vendasproject.dto.ClienteCreateDTO;
+import br.com.study.vendasproject.dto.ClienteDashboardDTO;
 import br.com.study.vendasproject.dto.ClienteResponseDTO;
 import br.com.study.vendasproject.rest.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +61,16 @@ public class ClienteService extends AbstractBaseClass {
                 .findById(id)
                 .orElseThrow(() -> new Exception(this.getMessage("cliente.not.found")));
     }
+
+    private Integer getCustomerTotal() {
+        return this.clienteRepository.getAllCustomersTotal();
+    }
+
+    public ClienteDashboardDTO getDashboardInfo() {
+        ClienteDashboardDTO dashboardDTO = new ClienteDashboardDTO();
+        dashboardDTO.setCustomerTotal(this.getCustomerTotal());
+        return dashboardDTO;
+    }
+
+
 }

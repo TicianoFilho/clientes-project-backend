@@ -2,6 +2,7 @@ package br.com.study.vendasproject.rest.resource;
 
 import br.com.study.vendasproject.domain.Cliente;
 import br.com.study.vendasproject.dto.ClienteCreateDTO;
+import br.com.study.vendasproject.dto.ClienteDashboardDTO;
 import br.com.study.vendasproject.dto.ClienteResponseDTO;
 import br.com.study.vendasproject.rest.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,10 @@ public class ClienteResource {
     @GetMapping
     public ResponseEntity<List<Cliente>> getAll() {
         return this.clienteService.getAll();
+    }
+
+    @GetMapping("/dashboard")
+    public ResponseEntity<ClienteDashboardDTO> getDashboardInfo() {
+        return new ResponseEntity<>(this.clienteService.getDashboardInfo(), HttpStatus.OK);
     }
 }
