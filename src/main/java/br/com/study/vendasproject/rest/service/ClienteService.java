@@ -4,8 +4,11 @@ import br.com.study.vendasproject.domain.Cliente;
 import br.com.study.vendasproject.dto.cliente.ClienteCreateDTO;
 import br.com.study.vendasproject.dto.cliente.ClienteDashboardDTO;
 import br.com.study.vendasproject.dto.cliente.ClienteResponseDTO;
+import br.com.study.vendasproject.dto.servico_prestado.ServicoPrestadoResponseDTO;
+import br.com.study.vendasproject.exception.ClienteCannotBeDeletedException;
 import br.com.study.vendasproject.rest.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ public class ClienteService extends AbstractBaseClass {
     private final ClienteRepository clienteRepository;
 
     @Autowired
+    private ServicoPrestadoService servicoPrestadoService;
+
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
@@ -35,9 +40,14 @@ public class ClienteService extends AbstractBaseClass {
         return new ResponseEntity<>(mapper.map(cliente, ClienteResponseDTO.class), HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> delete(Long id) {
+    public ResponseEntity<Void> delete(Long id) throws ClienteCannotBeDeletedException {
         Cliente clienteToDelete = clienteRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, this.getMessage("cliente.not.found")));
+
+        if (this.hasServicosPrestados(clienteToDelete.getId())) {
+            throw new ClienteCannotBeDeletedException(this.getMessage("cliente.connot.be.deleted.has.servicos_prestados", clienteToDelete.getId().toString()));
+        }
+
         clienteRepository.delete(clienteToDelete);
         return ResponseEntity.noContent().build();
     }
@@ -70,5 +80,9 @@ public class ClienteService extends AbstractBaseClass {
         return dashboardDTO;
     }
 
+    private boolean hasServicosPrestados(Long clienteId) {
+        List<ServicoPrestadoResponseDTO> servicosPrestados = this.servicoPrestadoService.getAllByClienteId(clienteId);
+        return !servicosPrestados.isEmpty();
+    }
 
 }

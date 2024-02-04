@@ -10,20 +10,24 @@ import br.com.study.vendasproject.exception.ServicoPrestadoException;
 import br.com.study.vendasproject.rest.repository.ServicoPrestadoRepository;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicoPrestadoService extends AbstractBaseClass {
 
     private final ServicoPrestadoRepository servicoPrestadoRepository;
-    private final ClienteService clienteService;
 
     @Autowired
-    public ServicoPrestadoService(ServicoPrestadoRepository servicoPrestadoRepository, ClienteService clienteService) {
+    private ClienteService clienteService;
+
+    public ServicoPrestadoService(ServicoPrestadoRepository servicoPrestadoRepository) {
         this.servicoPrestadoRepository = servicoPrestadoRepository;
-        this.clienteService = clienteService;
     }
 
     public ServicoPrestadoResponseDTO save(ServicoPrestadoCreateDTO servicoPrestadoCreateDTO) {
@@ -53,5 +57,20 @@ public class ServicoPrestadoService extends AbstractBaseClass {
         ServicoPrestadoDashboardDTO dashboardDTO = new ServicoPrestadoDashboardDTO();
         dashboardDTO.setServicoPrestadoTotal(this.getServicoPrestadoTotal());
         return dashboardDTO;
+    }
+
+    public List<ServicoPrestadoResponseDTO> getAllByClienteId(Long id) {
+        Optional<List<ServicoPrestado>> servicoPrestadosOptional = this.servicoPrestadoRepository.findAllByClienteId(id);
+
+        if (servicoPrestadosOptional.isPresent()) {
+            List<ServicoPrestadoResponseDTO> servicosPrestados = new ArrayList<>();
+            for (ServicoPrestado element : servicoPrestadosOptional.get()) {
+                ServicoPrestadoResponseDTO responseDTO = new ServicoPrestadoResponseDTO();
+                responseDTO = mapper.map(element, ServicoPrestadoResponseDTO.class);
+                servicosPrestados.add(responseDTO);
+            }
+            return servicosPrestados;
+        }
+        return null;
     }
 }

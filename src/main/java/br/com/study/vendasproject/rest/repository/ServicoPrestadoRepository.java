@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ServicoPrestadoRepository extends JpaRepository<ServicoPrestado, Long> {
 
@@ -15,9 +16,11 @@ public interface ServicoPrestadoRepository extends JpaRepository<ServicoPrestado
                     "where UPPER(c.nome) like UPPER(CONCAT('%', :nome, '%')) " +
                     "and MONTH(sp.dataCadastro) = :mes"
     )
-    public List<ServicoPrestado> findByClienteNomeAndMesServicoPrestado(
+    List<ServicoPrestado> findByClienteNomeAndMesServicoPrestado(
             @Param("nome") String clienteNome, @Param("mes") Integer mes);
 
     @Query(value = "select coalesce(count(*), 0) from servico_prestado", nativeQuery = true)
     Integer getAllServicoPrestadoTotal();
+
+    Optional<List<ServicoPrestado>> findAllByClienteId(Long clienteId);
 }

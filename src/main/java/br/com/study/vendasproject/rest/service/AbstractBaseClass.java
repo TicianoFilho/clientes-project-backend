@@ -17,4 +17,8 @@ public abstract class AbstractBaseClass {
         return this.messageSource.getMessage(messageCode, null, LocaleContextHolder.getLocale());
     }
 
+    protected String getMessage(String messageCode, String... args) {
+        return this.messageSource.getMessage(messageCode, args, LocaleContextHolder.getLocale());
+    }
+
 }

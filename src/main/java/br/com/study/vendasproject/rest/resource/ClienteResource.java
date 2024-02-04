@@ -4,11 +4,13 @@ import br.com.study.vendasproject.domain.Cliente;
 import br.com.study.vendasproject.dto.cliente.ClienteCreateDTO;
 import br.com.study.vendasproject.dto.cliente.ClienteDashboardDTO;
 import br.com.study.vendasproject.dto.cliente.ClienteResponseDTO;
+import br.com.study.vendasproject.exception.ClienteCannotBeDeletedException;
 import br.com.study.vendasproject.rest.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -38,7 +40,11 @@ public class ClienteResource {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        return this.clienteService.delete(id);
+        try {
+            return this.clienteService.delete(id);
+        } catch (ClienteCannotBeDeletedException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")

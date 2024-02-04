@@ -129,3 +129,9 @@ select * from servico_prestado sp inner join cliente c on sp.cliente_id = c.id w
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:750)
+2024-02-04 11:48:41 jdbc[53]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CPF CHARACTER VARYING(11)": "'475.694.280-64' (14)"; SQL statement:
+insert into cliente (id, cpf, data_cadastro, nome) values (default, ?, ?, ?) [22001-214]
+2024-02-04 11:48:49 jdbc[53]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CPF CHARACTER VARYING(11)": "'475.694.280-64' (14)"; SQL statement:
+insert into cliente (id, cpf, data_cadastro, nome) values (default, ?, ?, ?) [22001-214]

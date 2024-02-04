@@ -30,7 +30,7 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(ResponseStatusException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity handleValidationErros(ResponseStatusException ex) {
-        String errorMessage = ex.getMessage();
+        String errorMessage = ex.getReason();
         HttpStatus statusCode = ex.getStatus();
         ApplicationErrorsDTO errorsDTO = new ApplicationErrorsDTO(errorMessage);
         return new ResponseEntity(errorsDTO, statusCode);
