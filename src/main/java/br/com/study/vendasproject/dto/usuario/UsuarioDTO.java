@@ -1,4 +1,4 @@
-package br.com.study.vendasproject.dto;
+package br.com.study.vendasproject.dto.usuario;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioUsernameRequestDTO {
+public class UsuarioDTO {
+
+    private Long id;
 
     private String username;
+
+    private String password;
+
 }

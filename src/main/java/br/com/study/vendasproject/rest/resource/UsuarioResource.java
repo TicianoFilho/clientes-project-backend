@@ -1,7 +1,7 @@
 package br.com.study.vendasproject.rest.resource;
 
-import br.com.study.vendasproject.dto.UsuarioDTO;
-import br.com.study.vendasproject.dto.UsuarioUsernameRequestDTO;
+import br.com.study.vendasproject.dto.usuario.UsuarioDTO;
+import br.com.study.vendasproject.dto.usuario.UsuarioUsernameRequestDTO;
 import br.com.study.vendasproject.rest.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,9 @@
 package br.com.study.vendasproject.rest.resource;
 
-import br.com.study.vendasproject.dto.ServicoPrestadoCreateDTO;
-import br.com.study.vendasproject.dto.ServicoPrestadoResponseDTO;
+import br.com.study.vendasproject.dto.cliente.ClienteDashboardDTO;
+import br.com.study.vendasproject.dto.servico_prestado.ServicoPrestadoCreateDTO;
+import br.com.study.vendasproject.dto.servico_prestado.ServicoPrestadoDashboardDTO;
+import br.com.study.vendasproject.dto.servico_prestado.ServicoPrestadoResponseDTO;
 import br.com.study.vendasproject.rest.service.ServicoPrestadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,11 @@ public class ServicoPrestadoResource {
     ) {
         List<ServicoPrestadoResponseDTO> response = this.servicoPrestadoService.findByClienteNomeAndMesServicoPrestado(nomeCliente, mes);
         return new ResponseEntity<List<ServicoPrestadoResponseDTO>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/dashboard")
+    public ResponseEntity<ServicoPrestadoDashboardDTO> getDashboardInfo() {
+        return new ResponseEntity<>(this.servicoPrestadoService.getDashboardInfo(), HttpStatus.OK);
     }
 
 

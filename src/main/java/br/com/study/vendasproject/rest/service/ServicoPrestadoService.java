@@ -2,8 +2,10 @@ package br.com.study.vendasproject.rest.service;
 
 import br.com.study.vendasproject.domain.Cliente;
 import br.com.study.vendasproject.domain.ServicoPrestado;
-import br.com.study.vendasproject.dto.ServicoPrestadoCreateDTO;
-import br.com.study.vendasproject.dto.ServicoPrestadoResponseDTO;
+import br.com.study.vendasproject.dto.cliente.ClienteDashboardDTO;
+import br.com.study.vendasproject.dto.servico_prestado.ServicoPrestadoCreateDTO;
+import br.com.study.vendasproject.dto.servico_prestado.ServicoPrestadoDashboardDTO;
+import br.com.study.vendasproject.dto.servico_prestado.ServicoPrestadoResponseDTO;
 import br.com.study.vendasproject.exception.ServicoPrestadoException;
 import br.com.study.vendasproject.rest.repository.ServicoPrestadoRepository;
 import org.modelmapper.TypeToken;
@@ -41,5 +43,15 @@ public class ServicoPrestadoService extends AbstractBaseClass {
     public List<ServicoPrestadoResponseDTO> findByClienteNomeAndMesServicoPrestado(String clienteNome, Integer mes) {
         List<ServicoPrestado> servicosPrestados = this.servicoPrestadoRepository.findByClienteNomeAndMesServicoPrestado(clienteNome, mes);
         return mapper.map(servicosPrestados, new TypeToken<List<ServicoPrestadoResponseDTO>>(){}.getType());
+    }
+
+    private Integer getServicoPrestadoTotal() {
+        return this.servicoPrestadoRepository.getAllServicoPrestadoTotal();
+    }
+
+    public ServicoPrestadoDashboardDTO getDashboardInfo() {
+        ServicoPrestadoDashboardDTO dashboardDTO = new ServicoPrestadoDashboardDTO();
+        dashboardDTO.setServicoPrestadoTotal(this.getServicoPrestadoTotal());
+        return dashboardDTO;
     }
 }

@@ -1,8 +1,7 @@
-package br.com.study.vendasproject.dto;
+package br.com.study.vendasproject.dto.servico_prestado;
 
-import br.com.study.vendasproject.domain.Cliente;
+import br.com.study.vendasproject.dto.cliente.ClienteResponseDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

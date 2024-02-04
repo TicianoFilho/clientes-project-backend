@@ -1,12 +1,11 @@
 package br.com.study.vendasproject.rest.service;
 
 import br.com.study.vendasproject.domain.Usuario;
-import br.com.study.vendasproject.dto.UsuarioDTO;
-import br.com.study.vendasproject.dto.UsuarioUsernameRequestDTO;
+import br.com.study.vendasproject.dto.usuario.UsuarioDTO;
+import br.com.study.vendasproject.dto.usuario.UsuarioUsernameRequestDTO;
 import br.com.study.vendasproject.exception.UsuarioNotFoundException;
 import br.com.study.vendasproject.rest.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

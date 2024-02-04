@@ -1,9 +1,9 @@
 package br.com.study.vendasproject.rest.resource;
 
 import br.com.study.vendasproject.domain.Cliente;
-import br.com.study.vendasproject.dto.ClienteCreateDTO;
-import br.com.study.vendasproject.dto.ClienteDashboardDTO;
-import br.com.study.vendasproject.dto.ClienteResponseDTO;
+import br.com.study.vendasproject.dto.cliente.ClienteCreateDTO;
+import br.com.study.vendasproject.dto.cliente.ClienteDashboardDTO;
+import br.com.study.vendasproject.dto.cliente.ClienteResponseDTO;
 import br.com.study.vendasproject.rest.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package br.com.study.vendasproject.dto;
+package br.com.study.vendasproject.dto.servico_prestado;
 
 import br.com.study.vendasproject.domain.Cliente;
 import com.fasterxml.jackson.annotation.JsonProperty;

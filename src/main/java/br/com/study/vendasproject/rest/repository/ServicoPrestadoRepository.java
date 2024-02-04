@@ -1,7 +1,6 @@
 package br.com.study.vendasproject.rest.repository;
 
 import br.com.study.vendasproject.domain.ServicoPrestado;
-import br.com.study.vendasproject.dto.ServicoPrestadoResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +17,7 @@ public interface ServicoPrestadoRepository extends JpaRepository<ServicoPrestado
     )
     public List<ServicoPrestado> findByClienteNomeAndMesServicoPrestado(
             @Param("nome") String clienteNome, @Param("mes") Integer mes);
+
+    @Query(value = "select coalesce(count(*), 0) from servico_prestado", nativeQuery = true)
+    Integer getAllServicoPrestadoTotal();
 }

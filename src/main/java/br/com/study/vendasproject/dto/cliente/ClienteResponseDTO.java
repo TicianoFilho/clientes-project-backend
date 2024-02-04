@@ -1,4 +1,4 @@
-package br.com.study.vendasproject.dto;
+package br.com.study.vendasproject.dto.cliente;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
